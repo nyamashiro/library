@@ -1,0 +1,17 @@
+.books-container {
+  display: grid;
+  gap: 50px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  background-color: blueviolet;
+}
+
+.book {
+  /* width: 300px; */
+  background-color: aqua;
+  font-size: 1.5rem;
+}
+
+.book-form {
+  display: flex;
+  flex-direction: column;
+}
