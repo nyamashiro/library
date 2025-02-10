@@ -1,17 +1,98 @@
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: beige;
+}
+
+.header {
+  font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px 0;
+}
+
 .books-container {
   display: grid;
   gap: 50px;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  background-color: blueviolet;
+  padding: 50px;
 }
 
 .book {
-  /* width: 300px; */
-  background-color: aqua;
+  display: grid;
+  gap: 30px;
+  min-width: 300px;
+  max-width: 400px;
+  background-color: peachpuff;
   font-size: 1.5rem;
+  padding: 30px;
+  border-radius: 25px;
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+button {
+  cursor: pointer;
+  font-size: 1.2rem;
+  border-radius: 25px;
+  border: 1px solid peachpuff;
+  padding: 5px 10px;
+  font-weight: bold;
+}
+
+.remove-button {
+  width: 100px;
+}
+
+.read-button {
+  width: 220px;
 }
 
 .book-form {
   display: flex;
   flex-direction: column;
+}
+
+.title,
+.author,
+.pages,
+.have_read {
+  font-weight: bold;
+}
+
+span {
+  font-weight: normal;
+}
+
+.have_read {
+  background-color: brown;
+  width: 120px;
+  text-align: center;
+  color: white;
+  border-radius: 25px;
+  padding: 10px;
+  justify-self: center;
+}
+
+.add-book {
+  margin: 50px;
+  padding: 10px 20px;
+}
+
+.add-book-container {
+  display: flex;
+  justify-content: center;
+}
+form {
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: grid;
+  gap: 30px;
+  margin-top: 30px;
 }
