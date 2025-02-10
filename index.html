@@ -20,17 +20,18 @@
       <button class="close-form">X</button>
       <form action="#" method="get" class="book-form" autofocus>
         <label for="title">Title:
-          <input type="text" id="title">
+          <input type="text" id="title" required>
         </label>
         <label for="author">Author:
-          <input type="text" id="author">
+          <input type="text" id="author" required>
         </label>
         <label for="pages"># of pages:
-          <input type="text" id="pages">
+          <input type="text" id="pages" required>
         </label>
         <label for="have-read">Have you read it?
-          <input type="checkbox" id="have-read">
+          <input type="checkbox" id="have-read" required>
         </label>
+        <button class="submit" type="button">Submit</button>
       </form>
     </dialog>
     <button class="add-book">Add new book</button>
