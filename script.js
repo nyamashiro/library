@@ -6,7 +6,7 @@ const closeButton = document.querySelector(".close-form");
 const submitButton = document.querySelector(".submit");
 const form = document.querySelector("form")
 
-const myLibrary = [{ title: "anna and her missing strawberry chapstick", author: "anna", pages: 454, have_read: false }, { title: "nao's bowling bowl goes to the galaxy", author: "nao", pages: 232, have_read: true }, { title: "JAJU and the IDIT", author: "JAJU", pages: 32434, have_read: true }];
+const myLibrary = [];
 
 function Book(title, author, pages, have_read) {
   this.title = title;
@@ -73,21 +73,28 @@ function displayBook() {
           card.appendChild(newBook);
         } else {
           let newBook = document.createElement("div");
+          let newBookVal = document.createElement("span")
           newBook.classList.add(`${key}`);
-          newBook.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: ${book[key]}`;
+          newBook.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: `;
+          newBookVal.textContent = `${book[key]}`
           card.appendChild(newBook);
+          newBook.appendChild(newBookVal)
         }
       }
     }
+    let buttonContainer = document.createElement("div");
+    buttonContainer.classList.add("button-container");
+    card.appendChild(buttonContainer);
+
     let removeButton = document.createElement("button");
     removeButton.classList.add("remove-button");
     removeButton.textContent = "Remove";
-    card.appendChild(removeButton);
+    buttonContainer.appendChild(removeButton);
 
     let readButton = document.createElement("button");
     readButton.classList.add("read-button");
     readButton.textContent = "Change Read Status";
-    card.appendChild(readButton);
+    buttonContainer.appendChild(readButton);
   }
 }
 
