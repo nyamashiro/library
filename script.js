@@ -6,7 +6,7 @@ const closeButton = document.querySelector(".close-form");
 const submitButton = document.querySelector(".submit");
 const form = document.querySelector("form")
 
-const myLibrary = [{title: "toy story 1", author: "anna", pages: 454, have_read: false}, {title: "toy story 2", author: "nao", pages: 232, have_read: true}, {title: "toy story 3", author: "anandsd", pages: 232, have_read: false}];
+const myLibrary = [{ title: "anna and her missing strawberry chapstick", author: "anna", pages: 454, have_read: false }, { title: "nao's bowling bowl goes to the galaxy", author: "nao", pages: 232, have_read: true }, { title: "JAJU and the IDIT", author: "JAJU", pages: 32434, have_read: true }];
 
 function Book(title, author, pages, have_read) {
   this.title = title;
@@ -14,6 +14,38 @@ function Book(title, author, pages, have_read) {
   this.pages = pages;
   this.have_read = have_read;
 }
+
+Book.prototype.toggleReadStatus = function () {
+  if (this.have_read === true) {
+    this.have_read = false
+  } else {
+    this.have_read = true;
+  }
+
+  displayBook();
+}
+
+//bookCard is the currentTarget since it is the element that the event listener is actually attached to
+//event.target is the element the user actually clicks on
+bookCard.addEventListener("click", (e) => {
+  if (e.target.classList.contains("remove-button")) {
+    //look for the closest parent element with the class of ".book"
+    const selectedBook = e.target.closest(".book")
+
+    const bookKey = selectedBook.dataset.id
+    myLibrary.splice(bookKey, 1)
+    displayBook();
+  }
+})
+
+bookCard.addEventListener("click", (e) => {
+  if (e.target.classList.contains("read-button")) {
+    const selectedBook = e.target.closest(".book")
+
+    const bookKey = selectedBook.dataset.id
+    myLibrary[bookKey].toggleReadStatus();
+  }
+})
 
 function addBookToLibrary(title, author, pages, have_read) {
   const book = new Book(title, author, pages, have_read)
@@ -28,27 +60,37 @@ function displayBook() {
     card.dataset.id = index;
     bookCard.appendChild(card)
     for (let key in book) {
-      let newBook = document.createElement("div");
-      newBook.classList.add(`${key}`);
-      newBook.textContent = `${key}: ${book[key]}`;
-      card.appendChild(newBook);
+      if (book.hasOwnProperty(key)) {
+        if (key === "have_read" && book[key] === true) {
+          let newBook = document.createElement("div");
+          newBook.classList.add(`${key}`);
+          newBook.textContent = `Read`;
+          card.appendChild(newBook);
+        } else if (key === "have_read" && book[key] === false) {
+          let newBook = document.createElement("div");
+          newBook.classList.add(`${key}`);
+          newBook.textContent = `Not read`;
+          card.appendChild(newBook);
+        } else {
+          let newBook = document.createElement("div");
+          newBook.classList.add(`${key}`);
+          newBook.textContent = `${key.charAt(0).toUpperCase() + key.slice(1)}: ${book[key]}`;
+          card.appendChild(newBook);
+        }
+      }
     }
-    let remove = document.createElement("button")
-    remove.classList.add("remove-button")
-    remove.textContent = "Remove"
-    card.appendChild(remove)
+    let removeButton = document.createElement("button");
+    removeButton.classList.add("remove-button");
+    removeButton.textContent = "Remove";
+    card.appendChild(removeButton);
+
+    let readButton = document.createElement("button");
+    readButton.classList.add("read-button");
+    readButton.textContent = "Change Read Status";
+    card.appendChild(readButton);
   }
 }
 
-bookCard.addEventListener("click", (e) => {
-  if (e.target.classList.contains("remove-button")) {
-    const selectedBook = e.target.closest(".book")
-
-    const bookKey = selectedBook.dataset.id
-    myLibrary.splice(bookKey, 1)
-    displayBook();
-  }
-})
 
 showButton.addEventListener("click", () => {
   dialog.showModal();
