@@ -8,22 +8,40 @@ const form = document.querySelector("form")
 
 const myLibrary = [];
 
-function Book(title, author, pages, have_read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.have_read = have_read;
-}
-
-Book.prototype.toggleReadStatus = function () {
-  if (this.have_read === true) {
-    this.have_read = false
-  } else {
-    this.have_read = true;
+class Book {
+  constructor (title, author, pages, have_read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.have_read = have_read;
   }
 
-  displayBook();
+  toggleReadStatus() {
+    if (this.have_read === true) {
+      this.have_read = false
+    } else {
+      this.have_read = true;
+    }
+    displayBook();
+  }
 }
+
+// function Book(title, author, pages, have_read) {
+//   this.title = title;
+//   this.author = author;
+//   this.pages = pages;
+//   this.have_read = have_read;
+// }
+
+// Book.prototype.toggleReadStatus = function () {
+//   if (this.have_read === true) {
+//     this.have_read = false
+//   } else {
+//     this.have_read = true;
+//   }
+
+//   displayBook();
+// }
 
 //bookCard is the currentTarget since it is the element that the event listener is actually attached to
 //event.target is the element the user actually clicks on
